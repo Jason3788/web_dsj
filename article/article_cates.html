@@ -73,7 +73,33 @@
 {{/each}}
 
 </script>
+<script type="text/html" id="boxEditCate">
+    <form class="layui-form"  lay-filter="editDialog" id="boxEditCate">
 
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required lay-verify="required" placeholder="请输入标题" autocomplete="off"
+                    class="layui-input" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">分类别名</label>
+            <div class="layui-input-block">
+                <input type="text" name="alias" required lay-verify="required" placeholder="请输入标题" autocomplete="off"
+                    class="layui-input" />
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <input type="hidden" name="Id"/>
+                <button class="layui-btn" lay-submit>确认修改</button>
+            </div>
+        </div>
+    </form>
+</script>
      <!-- 导入layui js -->
      <script src="/assets/lib/layui/layui.all.js"></script>
      <script src="/assets/lib/jquery.js"></script>

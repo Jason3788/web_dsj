@@ -10,7 +10,9 @@ $(function () {
          var htmlStr = template('tpl-user', res)
          $(".layui-table").html(htmlStr)
      }
+     
  });
+    
    }
   
 var addIndex = null
@@ -38,9 +40,60 @@ var addIndex = null
      });
  })
    
+ var layerEditId = null
+ $("body").on("click",".btnEdit", function(){
+    var id = $(this).attr("data-id");
+   $.get("/my/article/cates/" + id ,res =>{
+    if (res.status !== 0) return layer.msg(res.message);
+       layerEditId = layer.open({
+        type: 1,
+        title: '修改文章分类',
+        content: $('#boxEditCate').html(),
+        area: ['500px', '250px'],
+        success: function(){
+            var form = layui.form
+          form.val('editDialog', res.data)
+        }
+    });
+   
+   })
+    
+  
+})
+
+
+$('body').on('submit', '#boxEditCate', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "/my/article/updatecate",
+        data: $(this).serialize(),
+        success: function (res) {
+            if (res.status !== 0) return layer.msg(res.message);
+            layer.msg(res.message);
+            upData();
+            layer.close(layerEditId)
+        }
+    });
+})
 
 
 
+
+$("body").on("click",".btnDelete",function(){
+    var id = $(this).attr("data-id");
+    $.get("/my/article/deletecate/" + id , res =>{
+        if (res.status !== 0) return layer.msg(res.message);
+        layer.msg(res.message);
+        upData();
+    })
+    
+
+
+
+
+
+})
 
 
  function deletList(data) {
