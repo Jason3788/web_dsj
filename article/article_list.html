@@ -10,26 +10,22 @@
 </head>
 <body>
 
+
     <div class="layui-card">
         <div class="layui-card-header">文章列表</div>
         <div class="layui-card-body">
-     <form class="layui-form" action="">
+     <form class="layui-form" id="form-search">
          <div class="layui-form-item">
             
-             <div class="layui-input-inline">
-                 <select name="city" lay-verify="">
-                     <option value="">请选择一个城市</option>
-                     <option value="010">北京</option>
-                     <option value="021">上海</option>
-                     <option value="0571">杭州</option>
-                     </select>
+             <div class="layui-input-inline" >
+                <select name="cate_name" id="article_fl">
+                </select>
              </div>
-              <div class="layui-input-inline">
-                  <select name="city" lay-verify="">
-                      <option value="">请选择一个城市</option>
-                      <option value="010">北京</option>
-                      <option value="021">上海</option>
-                      <option value="0571">杭州</option>
+              <div class="layui-input-inline" id="article_zt">
+                  <select name="states" lay-verify="">
+                      <option value="">所有状态</option>
+                      <option value="已发布">已发布</option>
+                      <option value="草稿">草稿</option>
                   </select>
               </div>
               <div class="layui-input-inline">
@@ -47,23 +43,14 @@
              <thead>
                  <tr>
                      <th>文章标题</th>
-                     <th> 分类</th>
+                     <th>分类</th>
                      <th>发表时间</th>
                      <th>状态</th>
                      <th>操作</th>
                  </tr>
              </thead>
              <tbody>
-                 <tr>
-                     <td>贤心</td>
-                     <td>2016-11-29</td>
-                     <td>人生就像是一场修行</td>
-                     <td>2016-11-29</td>
-                     <td><button type="button" class="layui-btn layui-btn-xs btn_edit"
-                             data-id="{{$value.Id}}">编辑</button>
-                         <button type="button" class="layui-btn layui-btn-danger layui-btn-xs btn_delete"
-                             data-id="{{$value.Id}}">删除</button></td>
-                 </tr>
+              
             
              </tbody>
          </table>
@@ -74,14 +61,23 @@
     </div>
     
 
+<script type="text/html" id="tpl-fl">
+    
+        <option value="">所属分类</option>
+        {{each data}}
+        <option value="{{$value.Id}}">{{$value.name}}</option>
+        {{/each}}
+
+    
+    </script>
 
 <script type="text/html" id ="article_list">
-{{each }}
+{{each data}}
  <tr>
-     <td>贤心</td>
-     <td>2016-11-29</td>
-     <td>人生就像是一场修行</td>
-     <td>2016-11-29</td>
+     <td>{{$value.title}}</td>
+     <td>{{$value.cate_name}}</td>
+     <td>{{$value.pub_date | dataFormat}}</td>
+     <td>{{$value.state}}</td>
      <td><button type="button" class="layui-btn layui-btn-xs btn_edit" data-id="{{$value.Id}}">编辑</button>
          <button type="button" class="layui-btn layui-btn-danger layui-btn-xs btn_delete"
              data-id="{{$value.Id}}">删除</button></td>

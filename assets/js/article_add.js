@@ -54,6 +54,7 @@ $("#form-pub").on("submit",function(e){
       }).toBlob(function(blob){
         fd.append("state", art_state);
         fd.append("cover_img", blob)
+        console.log(blob)
         $.ajax({
             type:'POST',
             url:'/my/article/add',
@@ -64,6 +65,7 @@ $("#form-pub").on("submit",function(e){
                 console.log(res)
                 if (res.status !== 0) return layer.msg(res.message);
                 layer.msg(res.message);
+                // location.href = "/article/article_list.html"
             }
         });
       })       // 将 Canvas 画布上的内容，转化为 base64 格式的字符串
